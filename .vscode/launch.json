@@ -1,0 +1,106 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Running (release debug)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": []
+        },
+        {
+            "name": "Running (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": []
+        },
+        {
+            "name": "Running (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Running on chrome (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port",
+                "49430"
+            ]
+        },
+        {
+            "name": "Running on chrome (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port",
+                "49430"
+            ]
+        },
+        {
+            "name": "Running on chrome (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-port",
+                "49430"
+            ]
+        },
+        {
+            "name": "Running on chrome with --web-render html (debug mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-renderer",
+                "html",
+                "--web-port",
+                "49430"
+            ]
+        },
+        {
+            "name": "Running on chrome with --web-render html (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-renderer",
+                "html",
+                "--web-port",
+                "49430"
+            ]
+        },
+        {
+            "name": "Running on chrome with --web-render html (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "-d",
+                "chrome",
+                "--web-renderer",
+                "html",
+                "--web-port",
+                "49430"
+            ]
+        }
+    ]
+}

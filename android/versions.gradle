@@ -1,0 +1,112 @@
+def build_versions = [:]
+build_versions.min_sdk = 21 // android lollipop ( 5.0 )
+build_versions.target_sdk = 34 // android latest
+build_versions.compile_sdk = build_versions.target_sdk
+build_versions.build_tools = "34.0.0"
+def major = 1
+def minor = 0
+def patch = 0
+build_versions.code = (major + minor + patch)
+build_versions.name = "$major.$minor.$patch"
+ext.build_versions = build_versions
+
+ext {
+    vGradle = "8.2.2"
+    vKotlin = "1.9.22"
+    kotlin_version = "$vKotlin"
+    vNdkVersion = "26.1.10909125"
+
+    // https://developer.android.com/jetpack/androidx/releases/activity
+    vAndroidxActivity = "1.8.2"
+    // https://developer.android.com/jetpack/androidx/releases/annotation
+    vAndroidxAnnotation = "1.7.1"
+    // https://developer.android.com/jetpack/androidx/releases/annotation
+    vAndroidxAnnotationExperimental = "1.3.1"
+    // https://developer.android.com/jetpack/androidx/releases/appcompat
+    vAndroidxAppCompat = "1.6.1"
+    // https://developer.android.com/jetpack/androidx/releases/arch-core
+    vAndroidxArchCore = "2.2.0"
+    // https://developer.android.com/jetpack/androidx/releases/collection
+    vAndroidxCollection = "1.3.0"
+    // https://developer.android.com/jetpack/androidx/releases/concurrent
+    vAndroidxConcurrent = "1.1.0"
+    // https://developer.android.com/jetpack/androidx/releases/constraintlayout
+    vAndroidxConstrainLayout = "2.1.4"
+    // https://developer.android.com/jetpack/androidx/releases/coordinatorlayout
+    vAndroidxCoordinatorLayout = "1.2.0"
+    // https://developer.android.com/jetpack/androidx/releases/core
+    vAndroidxCore = "1.12.0"
+    // https://developer.android.com/jetpack/androidx/releases/customview
+    vAndroidxCustomview = "1.1.0"
+    // https://developer.android.com/jetpack/androidx/releases/customview
+    vAndroidxCustomviewPoolingContainer = "1.0.0"
+    // https://developer.android.com/jetpack/androidx/releases/documentfile
+    vAndroidxDocumentFile = "1.0.1"
+    // https://developer.android.com/jetpack/androidx/releases/drawerlayout
+    vAndroidxDrawerLayout = "1.2.0"
+    // https://developer.android.com/jetpack/androidx/releases/fragment
+    vAndroidxFragment = "1.6.2"
+    // https://developer.android.com/jetpack/androidx/releases/lifecycle
+    vAndroidxLifecycle = "2.7.0"
+    // https://developer.android.com/jetpack/androidx/releases/loader
+    vAndroidxLoader = "1.1.0"
+    // https://developer.android.com/jetpack/androidx/releases/localbroadcastmanager
+    vAndroidxLocalbroadcastmanager = "1.1.0"
+    // https://developer.android.com/jetpack/androidx/releases/print
+    vAndroidxPrint = "1.1.0-beta01"
+    // https://developer.android.com/jetpack/androidx/releases/recyclerview
+    vAndroidxRecyclerview = "1.3.2"
+    // https://developer.android.com/jetpack/androidx/releases/room
+    vAndroidxRoom = "2.6.1"
+    // https://developer.android.com/jetpack/androidx/releases/savedstate
+    vAndroidxSavedstate = "1.2.1"
+    // https://developer.android.com/jetpack/androidx/releases/test
+    vAndroidxTestCore = "1.5.0"
+    // https://developer.android.com/jetpack/androidx/releases/test
+    vAndroidxTestEspresso = "3.5.1"
+    // https://developer.android.com/jetpack/androidx/releases/test
+    vAndroidxTestExtJunit = "1.1.5"
+    // https://developer.android.com/jetpack/androidx/releases/test
+    vAndroidxTestMonitor = "1.6.1"
+    // https://developer.android.com/jetpack/androidx/releases/test
+    vAndroidxTestRules = "1.5.0"
+    // https://developer.android.com/jetpack/androidx/releases/tracing
+    vAndroidxTracing = "1.2.0"
+    // https://developer.android.com/jetpack/androidx/releases/transition
+    vAndroidxTransition = "1.4.1"
+    // https://developer.android.com/jetpack/androidx/releases/vectordrawable
+    vAndroidxVectorDrawable = "1.1.0"
+    // https://developer.android.com/jetpack/androidx/releases/versionedparcelable
+    vAndroidxVersionedparcelable = "1.2.0"
+    // https://developer.android.com/jetpack/androidx/releases/viewpager
+    vAndroidxViewPager = "1.0.0"
+    // https://developer.android.com/jetpack/androidx/releases/viewpager2
+    vAndroidxViewPager2 = "1.0.0"
+    // https://firebase.google.com/support/release-notes/android
+    vFirebaseBoom = "32.7.0"
+    // https://developers.google.com/android/guides/google-services-plugin
+    vGoogleServices = "4.4.0"
+    // https://www.eclemma.org/jacoco/#:~:text=JaCoCo%20is%20a%20free%20code,existing%20libraries%20for%20many%20years.
+    vJacoco = "0.8.11"
+    // https://mvnrepository.com/artifact/junit/junit
+    vJunit = "4.13.2"
+    // https://github.com/Kotlin/kotlinx.coroutines
+    vKotlinCoroutines = "1.7.3"
+}
+
+def addRepos(RepositoryHandler handler) {
+    handler.gradlePluginPortal()
+    handler.google()
+    handler.mavenCentral()
+    handler.maven {
+        url "https://jcenter.bintray.com"
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+        url "https://jitpack.io"
+    }
+    handler.mavenLocal()
+    handler.mavenLocal {
+        it.url("${rootDir}/.m2/repository")
+    }
+}
+
+ext.addRepos = this.&addRepos
