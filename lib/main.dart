@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:test/firebase_options.dart';
 import 'package:test/pages/device_code_page.dart';
+import 'package:test/pages/home_page.dart';
+
+String? deviceId;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +44,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      // initialRoute: '/',
+      // routes: {
+      //   // When navigating to the "/" route, build the FirstScreen widget.
+      //   '/': (context) => const DeviceCodePage(),
+      //   // When navigating to the "/second" route, build the SecondScreen widget.
+      //   '/home': (context) => const HomePage("sasasasa"),
+      // },
       home: const DeviceCodePage(),
     );
   }

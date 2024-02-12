@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:test/pages/home_page.dart';
 import 'package:test/utils.dart/utils.dart';
 
 class DeviceCodePage extends StatefulWidget {
@@ -17,6 +19,9 @@ class _DeviceCodePageState extends State<DeviceCodePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (kDebugMode) {
+      _controller.text = "HzjALQGC5PfexA4lrnTo";
+    }
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -70,6 +75,13 @@ class _DeviceCodePageState extends State<DeviceCodePage> {
                             fixedSize: Size(getWidthDevice(context, 65), 40),
                           ),
                           onPressed: () {
+                            // Navigator.of(context).push(
+                            //   MaterialPageRoute(
+                            //     builder: (context) =>
+                            //         HomePage("HzjALQGC5PfexA4lrnTo"),
+                            //   ),
+                            // );
+                            // return;
                             String deviceCode = _controller.text;
                             if (deviceCode.isEmpty) {
                               setState(() {
@@ -94,7 +106,11 @@ class _DeviceCodePageState extends State<DeviceCodePage> {
                                 return;
                               }
                               final String deviceId = data['device_id'];
-                              print(deviceId);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => HomePage(deviceId),
+                                ),
+                              );
                             });
                           },
                           child: const Text("Submit"),
