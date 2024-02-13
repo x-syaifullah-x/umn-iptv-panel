@@ -37,6 +37,27 @@ jobs:
           name: apk-release
           path: build/app/outputs/flutter-apk/app-release.apk
 
+      - name: Build APK split-per abi release
+        run: flutter build apk --split-per-abi --release
+
+      - name: Upload artifact APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-armeabi-v7a-release
+          path: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+
+      - name: Upload artifact APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-arm64-v8a-release
+          path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+
+      - name: Upload artifact APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-x86_64-release
+          path: build/app/outputs/flutter-apk/app-x86_64-release.apk
+
       - name: Build WEB release
         run: flutter build web --release --web-renderer html
 

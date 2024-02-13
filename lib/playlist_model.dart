@@ -35,4 +35,19 @@ class PlaylistModel {
       fieldUpdateAt: updateAt,
     };
   }
+
+  PlaylistModel copy({
+    String? id,
+    String? name,
+    String? url,
+    int? createAt,
+    int? updateAt,
+  }) =>
+      PlaylistModel(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        url: url ?? this.url,
+        createAt: createAt ?? this.createAt,
+        updateAt: updateAt ?? this.updateAt,
+      );
 }

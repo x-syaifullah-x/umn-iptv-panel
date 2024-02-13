@@ -105,6 +105,7 @@ class _DeviceCodePageState extends State<DeviceCodePage> {
                                 });
                                 return;
                               }
+                              _focusNode.unfocus();
                               final String deviceId = data['device_id'];
                               Navigator.of(context).push(
                                 MaterialPageRoute(
