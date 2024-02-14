@@ -1,10 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:test/firebase_options.dart';
 import 'package:test/pages/device_code_page.dart';
-import 'package:test/pages/home_page.dart';
+import 'package:test/utils/firebase_options.dart';
 
 String? deviceId;
 

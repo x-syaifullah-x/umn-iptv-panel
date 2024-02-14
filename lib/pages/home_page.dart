@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:test/extensions/build_context_extention.dart';
+import 'package:test/models/playlist_model.dart';
 import 'package:test/pages/add_or_change_dialog.dart';
-import 'package:test/playlist_model.dart';
-import 'package:test/utils.dart/utils.dart';
 
 class HomePage extends StatefulWidget {
   final String deviceId;
@@ -18,7 +18,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int tmp = 65;
+  String order = 'name';
+  // bool isReverseOrder = true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,39 +32,44 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 24,
-            ),
-            const Text(
-              "Playlist",
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Row(
+        child: Center(
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 550),
+            child: Column(
               children: [
                 const SizedBox(
-                  width: 8,
+                  height: 24,
                 ),
-                _addDataWidget(collectionPlaylist),
+                const Text(
+                  "Playlist",
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(
-                  width: 8,
+                  height: 24,
                 ),
-                _sortingWidget(context),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    _addDataWidget(collectionPlaylist),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    _sortingWidget(context),
+                  ],
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Flexible(child: _itemWidget(collectionPlaylist)),
+                _logoutWidget(),
               ],
             ),
-            const SizedBox(
-              height: 8,
-            ),
-            Flexible(child: _itemWidget(collectionPlaylist)),
-            _logoutWidget(),
-          ],
+          ),
         ),
       ),
     );
@@ -72,7 +78,7 @@ class _HomePageState extends State<HomePage> {
   Widget _logoutWidget() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(getWidthDevice(context, 65), 40),
+        fixedSize: Size(context.getWidthDevice(65), 40),
       ),
       onPressed: () {
         Navigator.of(context).pop();
@@ -85,7 +91,7 @@ class _HomePageState extends State<HomePage> {
     CollectionReference<Map<String, dynamic>> collectionPlaylist,
   ) {
     return StreamBuilder(
-      stream: collectionPlaylist.orderBy("name").snapshots(),
+      stream: collectionPlaylist.orderBy(b[selectedOption]).snapshots(),
       builder: (context, snapshot) {
         ConnectionState state = snapshot.connectionState;
         bool isActive = state == ConnectionState.active;
@@ -243,6 +249,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  int selectedOption = 0;
+  List<String> a = ['Name', 'Date'];
+  List<String> b = [
+    'name',
+    'createAt',
+  ];
   Widget _sortingWidget(BuildContext context) {
     return InkWell(
       borderRadius: const BorderRadius.all(
@@ -253,9 +265,85 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.sort_sharp),
       ),
       onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Sorting feature coming soon"),
-        ));
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            int currentValue = selectedOption;
+            return StatefulBuilder(builder: (context, setState) {
+              return AlertDialog(
+                title: const Text("Sort by"),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(a[0]),
+                      leading: Radio(
+                        value: 0,
+                        groupValue: selectedOption,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOption = value!;
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(a[1]),
+                      leading: Radio(
+                        value: 1,
+                        groupValue: selectedOption,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOption = value!;
+                          });
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              selectedOption = currentValue;
+                              Navigator.of(context).pop(false);
+                            },
+                            child: const Text("cancel"),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pop(selectedOption != currentValue);
+                            },
+                            child: const Text("ok"),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            });
+          },
+        ).then((value) {
+          if (value) {
+            setState(() {});
+          }
+        });
+        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        //   content: Text("Sorting feature coming soon"),
+        // ));
       },
     );
   }

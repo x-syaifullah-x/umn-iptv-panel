@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:test/playlist_model.dart';
+import 'package:test/models/playlist_model.dart';
 
 class AddUpdateDialog extends StatefulWidget {
   final String title;
@@ -159,7 +159,7 @@ class _AddUpdateDialogState extends State<AddUpdateDialog> {
                 ),
               ),
               const SizedBox(
-                height: 8,
+                height: 16,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

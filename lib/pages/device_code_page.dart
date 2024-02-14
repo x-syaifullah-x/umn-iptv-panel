@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:test/extensions/build_context_extention.dart';
 import 'package:test/pages/home_page.dart';
-import 'package:test/utils.dart/utils.dart';
 
 class DeviceCodePage extends StatefulWidget {
   const DeviceCodePage({super.key});
@@ -72,7 +72,7 @@ class _DeviceCodePageState extends State<DeviceCodePage> {
                       Center(
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            fixedSize: Size(getWidthDevice(context, 65), 40),
+                            fixedSize: Size(context.getWidthDevice(65), 40),
                           ),
                           onPressed: () {
                             // Navigator.of(context).push(
